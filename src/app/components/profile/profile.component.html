@@ -1,0 +1,132 @@
+<div data-scroll-section>
+  <div class="container__profile-heading">
+    <h1 class="profile__heading-1">
+      Quản lý tài khoản
+    </h1>
+  </div>
+  <h1 class="profile__heading-now">Đang đăng nhập bằng email: {{nameAccount}}</h1>
+  <div class="container__profile">
+    <div class="profile__sidebar">
+      <button class="profile__sidebar-item" (click)="clickHistory = true; clickChangePassword = false"
+        [style.background]="clickHistory? '#464646' : 'transparent'">
+        Lịch sử đơn hàng
+      </button>
+      <button class="profile__sidebar-item" (click)="clickHistory = false; clickChangePassword = true"
+        [style.background]="clickChangePassword? '#464646' : 'transparent'">
+        Thay đổi mật khẩu
+      </button>
+      <button class="profile__sidebar-item" (click)="logout()">
+        Đăng xuất
+      </button>
+    </div>
+    <div class="profile__body">
+      <div *ngIf="clickHistory">
+        <table class="cart__table margin-bottom-7vw" *ngIf="watchAll">
+          <tr class="cart__table-thead">
+            <th class="cart__product-thumbnail">STT</th>
+            <th class="cart__product-quantity">Ngày đặt</th>
+            <th class="cart__product-quantity">Ngày giao</th>
+            <th class="cart__product-subtotal">Giá trị đơn hàng</th>
+            <th class="cart__product-remove">&nbsp;</th>
+          </tr>
+          <ng-container *ngIf="tatCaDonHang.length > 0, else noOrder">
+            <tr class="cart__table-tbody" *ngFor="let order of tatCaDonHang; let i = index">
+              <td class="cart__product-thumbnail">
+                {{i + 1}}
+              </td>
+              <td class="cart__product-price">
+                <span>{{order.ngaylap | date: 'dd/MM/yyyy'}}</span>
+              </td>
+              <td class="cart__product-price">
+                <span>{{order.ngaygiao | date: 'dd/MM/yyyy'}}</span>
+              </td>
+              <td class="cart__product-subtotal">
+                <span>{{order.tongtien | tiente}}</span>
+              </td>
+              <td class="cart__product-remove" (click)="watchDetailOrder(order.madh)">
+                Xem chi tiết
+              </td>
+            </tr>
+          </ng-container>
+          <ng-template #noOrder>
+            <tr class="">
+              <td colspan="5" class="cart__product-noproduct" style="text-align:center; color: #ffffff">
+                Chưa có đơn hàng trên hệ thống.
+              </td>
+            </tr>
+          </ng-template>
+        </table>
+        <table class="cart__table margin-bottom-7vw" *ngIf="watchDetail">
+          <tr class="cart__table-thead">
+            <th class="cart__product-thumbnail">STT</th>
+            <th class="cart__product-name">Sản phẩm</th>
+            <th class="cart__product-price">Đơn giá</th>
+            <th class="cart__product-quantity">Số lượng</th>
+            <th class="cart__product-subtotal">Thành tiền</th>
+          </tr>
+          <tr class="cart__table-tbody" *ngFor="let item of danhSachChiTiet; let i = index">
+            <td class="cart__product-thumbnail">
+              <img class="cart__product-thumbnail-img" src="/assets/images/sanpham/{{item.hinhsp1}}"
+                alt="{{item.hinhsp1}}">
+            </td>
+            <td class="cart__product-name underline">
+              <a href="http://localhost:4200/product_detail/{{item.tensp}}">{{item.tensp | tensanpham}}</a>
+            </td>
+            <td class="cart__product-price">
+              <span>{{item.dongia | tiente}}</span>
+            </td>
+            <td class="cart__product-quantity">
+              <span>{{item.soluong}}</span>
+            </td>
+            <td class="cart__product-subtotal">
+              <span>{{item.thanhtien | tiente}}</span>
+            </td>
+          </tr>
+          <tr class="cart__table-tfooter">
+            <td colspan="5">
+              <div class="cart__product-total-second">
+                <a (click)="watchAllOrder()">
+                  Quay lại
+                </a>
+              </div>
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div *ngIf="clickChangePassword" class="container__profile-change-password" [formGroup]="formChangePassword">
+        <p class="account__paragraph">Nhập mật khẩu cũ *</p>
+        <input type="password" autocomplete="current-password" class="account__input" formControlName="passwordCurrent">
+        <div style="color: red; margin-top: 1.5vw;"
+          *ngIf="(passwordCurrent.invalid && passwordCurrent.touched) || (submittedChangePassword && passwordCurrent.untouched)">
+          <span *ngIf="passwordCurrent.errors?.required">Vui lòng nhập password! Đây là yêu cầu bắt buộc!</span>
+          <span *ngIf="passwordCurrent.errors?.minlength">Vui lòng nhập password ít nhất có 8 kí tự.</span>
+          <span *ngIf="passwordCurrent.errors?.maxlength">Vui lòng nhập password tối đa có 50 kí tự.</span>
+        </div>
+        <p class="account__paragraph-2">Mật khẩu mới *</p>
+        <input type="password" autocomplete="new-password" class="account__input" formControlName="passwordNew">
+        <div style="color: red; margin-top: 1.5vw;"
+          *ngIf="(passwordNew.invalid && passwordNew.touched) || (submittedChangePassword && passwordNew.untouched)">
+          <span *ngIf="passwordNew.errors?.required">Vui lòng nhập password! Đây là yêu cầu bắt buộc!</span>
+          <span *ngIf="passwordNew.errors?.minlength">Vui lòng nhập password ít nhất có 8 kí tự.</span>
+          <span *ngIf="passwordNew.errors?.maxlength">Vui lòng nhập password tối đa có 50 kí tự.</span>
+        </div>
+        <p class="account__paragraph-2">Xác nhận lại mật khẩu mới *</p>
+        <input type="password" autocomplete="new-password" class="account__input" formControlName="passwordConfirm">
+        <div style="color: red; margin-top: 1.5vw;"
+          *ngIf="(passwordConfirm.invalid && passwordConfirm.touched) || (submittedChangePassword && passwordConfirm.untouched)">
+          <span *ngIf="passwordConfirm.errors?.required">Vui lòng nhập password! Đây là yêu cầu bắt buộc!</span>
+          <span *ngIf="passwordConfirm.errors?.minlength">Vui lòng nhập password ít nhất có 8 kí tự.</span>
+          <span *ngIf="passwordConfirm.errors?.maxlength">Vui lòng nhập password tối đa có 50 kí tự.</span>
+        </div>
+        <div class="account__group-button text-center">
+          <a class="grid__interview-link" (click)="changePassword()">
+            Xác nhận lưu lại
+          </a>
+          <a class="grid__interview-link" (click)="clearInput()">
+            Xóa nhập lại
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

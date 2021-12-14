@@ -1,0 +1,168 @@
+<div class="navbar">
+  <a href="/" title="Logo" class="logo">
+    <img src="./../../../assets/images/giaodien/logo.png" alt="logo.png" class="logo__image">
+  </a>
+  <div class="navbar__menu">
+    <div class="navbar__menu-link">
+      <a
+        href="{{idAccount !== null && idAccount !== 0 ? 'http://localhost:4200/profile' : 'http://localhost:4200/account'}}">
+        <span title="Account" class="menu__user">
+          <i class="fa fa-user fa-lg" aria-hidden="true"></i>
+        </span>
+      </a>
+    </div>
+    <div class="navbar__menu-link">
+      <a href="http://localhost:4200/cart">
+        <span title="Cart" class="menu__cart">
+          <i class="fa fa-shopping-basket fa-lg" aria-hidden="true"></i>
+        </span>
+      </a>
+    </div>
+    <div class="toggle-second">
+      <span title="Search" href="#" class="menu__search-open">
+        <i class="fa fa-search fa-lg" aria-hidden="true"></i>
+      </span>
+      <span title="Close" href="#" class="menu__search-close">
+        <i class="fa fa-times fa-lg" aria-hidden="true"></i>
+      </span>
+    </div>
+    <div class="toggle-first">
+      <span title="Menu" href="#" class="menu__actions-open">
+        <i class="fa fa-align-right fa-lg" aria-hidden="true"></i>
+      </span>
+      <span title="Close" href="#" class="menu__actions-close">
+        <i class="fa fa-times fa-lg" aria-hidden="true"></i>
+      </span>
+    </div>
+  </div>
+</div>
+<div class="wrapper-first">
+  <div class="nav">
+    <ul class="main__menu">
+      <li data-bg="banner.jpg" class="main__menu-item">
+        <a href="http://localhost:4200/gioithieu">
+          <span id="order">01.</span>
+          <span id="menu">&nbsp;Giới thiệu /</span>
+          <span id="tag"> Câu chuyện về chúng tôi</span>
+        </a>
+      </li>
+      <li data-bg="banner2.jpg" class="main__menu-item">
+        <a href="http://localhost:4200/products">
+          <span id="order">02.</span>
+          <span id="menu">&nbsp;Bộ sưu tập /</span>
+          <span id="tag"> Sản phẩm của chúng tôi</span>
+        </a>
+      </li>
+      <li data-bg="banner4.jpg" class="main__menu-item">
+        <a href="http://localhost:4200/chamsoc">
+          <span id="order">03.</span>
+          <span id="menu">&nbsp;Dịch vụ /</span>
+          <span id="tag"> Chính sách chăm sóc khách hàng</span>
+        </a>
+      </li>
+      <li data-bg="banner3.jpg" class="main__menu-item">
+        <a href="http://localhost:4200/lienhe">
+          <span id="order">04.</span>
+          <span id="menu">&nbsp;Liên hệ /</span>
+          <span id="tag"> Liên lạc với chúng tôi</span>
+        </a>
+      </li>
+    </ul>
+    <div class="wrapper__images">
+      <img id="divImageChange" class="wrapper__image" src="/assets/images/giaodien/banner.jpg" alt="banner.jpg">
+    </div>
+  </div>
+</div>
+<div class="wrapper-second">
+  <div class="container__search">
+    <div class="search__input">
+      <h2 class="search__heading">Tìm kiếm</h2>
+      <div class="search__body">
+        <input type="text" class="search__body-input" [(ngModel)]="searchText" placeholder="Nhập kết quả muốn tìm kiếm">
+        <button type="button" class="search__body-button">
+          <i class="fa fa-search search__body-icon" aria-hidden="true"></i>
+        </button>
+        <div class="list-autocomplete">
+          <ul>
+            <li *ngFor="let product of products |filter:searchText">
+              <a class="list__item-autocomplete" href="http://localhost:4200/product_detail/{{product.masp}}">
+                <img class="list__img-autocomplete" src="../../../assets/images/sanpham/{{product.hinhsp1}}"
+                  alt="{{product.hinhsp1}}">
+                <p class="list__paragraph-autocomplete">{{product.tensp}}</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class=" wrapper__overlay">
+</div>
+<div class="wrapper__filter-open">
+  <div class="wrapper__filter-heading">
+    <button class="wrapper__filter-heading-left" (click)="resetFilter()">Xóa tất cả</button>
+    <p class="wrapper__filter-heading-center">Lọc sản phẩm</p>
+    <div class="wrapper__filter-heading-right wrapper__filter-close">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </div>
+  </div>
+  <div class="wrapper__filter-body">
+    <div class="wrapper__filter-item">
+      <p class="wrapper__filter-paragraph">Thương hiệu</p>
+      <div class="wrapper__filter-subitem">
+        <p class="wrapper__subitem-item" *ngFor="let item of arrFilter[0]"
+          [ngStyle]="{'border-color': item.active ? '#000000' : '#40404038'}" (click)="selectedFilter(item)">
+          {{item.trademark}}
+        </p>
+      </div>
+    </div>
+    <div class="wrapper__filter-item">
+      <p class="wrapper__filter-paragraph">Dòng sản phẩm</p>
+      <div class="wrapper__filter-subitem second">
+        <p class="wrapper__subitem-item" *ngFor="let item of arrFilter[1]"
+          [ngStyle]="{'border-color': item.active ? '#000000' : '#40404038'}" (click)="selectedFilter(item)">
+          {{item.category}}
+        </p>
+      </div>
+    </div>
+    <div class="wrapper__filter-item">
+      <p class="wrapper__filter-paragraph">Khoảng giá</p>
+      <div class="wrapper__filter-subitem">
+        <input type="number" maxlength="12" class="price-range-filter__input" placeholder="TỪ"
+          [(ngModel)]="arrFilter[2].from">
+        <span> - </span>
+        <input type="number" maxlength="12" class="price-range-filter__input" placeholder="ĐẾN"
+          [(ngModel)]="arrFilter[2].to">
+      </div>
+    </div>
+    <div class="wrapper__filter-item">
+      <p class="wrapper__filter-paragraph">
+        Kích thước
+      </p>
+      <div class="wrapper__filter-subitem">
+        <p class="wrapper__subitem-item">42 MM</p>
+        <p class="wrapper__subitem-item">45 MM</p>
+      </div>
+
+    </div>
+    <div class="wrapper__filter-item">
+      <p class="wrapper__filter-paragraph">Màu sắc</p>
+      <div class="wrapper__filter-subitem">
+        <p class="wrapper__subitem-item">Đen</p>
+        <p class="wrapper__subitem-item">Trắng</p>
+        <p class="wrapper__subitem-item">Bạc</p>
+        <p class="wrapper__subitem-item">Vàng</p>
+        <p class="wrapper__subitem-item">Xanh</p>
+      </div>
+    </div>
+  </div>
+  <div class="wrapper__filter-footer">
+    <button class="button button--hyperion border">
+      <span><span>
+          <a (click)="filterProduct()">Áp dụng</a>
+        </span></span>
+    </button>
+  </div>
+</div>

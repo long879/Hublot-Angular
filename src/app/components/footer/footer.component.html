@@ -1,0 +1,47 @@
+<div class="container__support" data-scroll-section>
+  <div class="info__support">
+    <div class="container__support-time">
+      <p class="text-bold">Bảo hành tận 5 năm</p>
+      <p style="color: #ffffff">Tận hưởng sản phẩm chất lượng cao</p>
+    </div>
+    <div class="container__support-delivery">
+      <p class="text-bold">Giao nhận và đổi trả</p>
+      <p style="color: #ffffff">Bạn có quyền thử và trả hàng miễn phí</p>
+    </div>
+    <div class="container__support-pay">
+      <p class="text-bold">Hỗ trợ thanh toán trả góp</p>
+      <p style="color: #ffffff">Thủ tục giao dịch nhanh chóng, tiện lợi</p>
+    </div>
+  </div>
+  <div class="container__email">
+    <div class="container__email-left">
+      <div class="container__email-row">
+        <h1 class="text-bold">Đăng ký nhận tin tức mới nhất</h1>
+        <div [formGroup]="formSendEmail">
+          <input class="input__email" type="email" name="EMAIL" placeholder="Nhập địa chỉ email của bạn"
+            formControlName="email">
+          <input type="submit" value="GỬI" (click)="sendEmail()">
+          <div style="color: red; margin-top: 1.5vw;"
+            *ngIf="(emailSend.invalid && emailSend.touched) || (submittedEmail && emailSend.untouched)">
+            <span *ngIf="emailSend.errors?.required">Vui lòng nhập email! Đây là yêu cầu bắt buộc!</span>
+            <span *ngIf="emailSend.errors?.email">Email không hợp lệ! Vui lòng kiểm tra lại email!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container__email-right">
+      <div class="email-hover-facebook">
+        <a href="" class="email__link-facebook">Facebook</a>
+      </div>
+      <div class="email-hover-youtube">
+        <a href="" class="email__link-youtube">Youtube</a>
+      </div>
+      <div class="email-hover-instagram">
+        <a href="" class="email__link-instagram">Instagram</a>
+      </div>
+      <div class="email-hover-twitter">
+        <a href="" class="email__link-twitter">Twitter</a>
+      </div>
+    </div>
+  </div>
+</div>

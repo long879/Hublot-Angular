@@ -1,0 +1,91 @@
+<div data-scroll-section>
+  <div class="navbar__breadcrumb">
+    <ol class="navbar__breadcrumb-list">
+      <li class="navbar__breadcrumb-item">
+        <a href="http://localhost:4200/products" class="navbar__breadcrumb-link">Đồng hồ</a>
+      </li>
+      <span class="navbar__breadcrumb-separator">></span>
+      <li class="navbar__breadcrumb-item">
+        <a href="{{breadcrumbTH !== 'Tất cả sản phẩm' ? (breadcrumbTH !== 'Kết quả lọc' ? 'http://localhost:4200/products/loaithuonghieu/' + breadcrumbTH
+          : 'http://localhost:4200/products/filterData') : 'http://localhost:4200/products'}}"
+          class="navbar__breadcrumb-link">{{breadcrumbTH}}</a>
+      </li>
+      <span class="navbar__breadcrumb-separator">{{breadcrumbLSP !== "" ? ">" : ""}}</span>
+      <li class="navbar__breadcrumb-item">
+        <a href="" class="navbar__breadcrumb-link">{{breadcrumbLSP !== "" ? breadcrumbLSP : ""}}</a>
+      </li>
+    </ol>
+  </div>
+  <div class="filter">
+    <div class="filter__info">
+      <div class="filter__models">
+        <small class="filter__small">
+          <span>Tổng cộng có: {{soSanPham}} sản phẩm</span>
+        </small>
+      </div>
+      <div class="filter__models">
+        <small class="filter__small sort">
+          <select ngModel (ngModelChange)="sort($event)">
+            <option value="" selected disabled hidden>Sắp xếp theo</option>
+            <option *ngFor="let opt of options" [ngValue]="opt.id">
+              {{opt.name}}</option>
+          </select>
+        </small>
+      </div>
+      <div class="filter__container-button">
+        <button type="button" class="filter__button">
+          <span>Lọc</span>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="container__filter-heading">
+    <h1 class="filter__heading-1">
+      {{heading}}
+    </h1>
+    <div class="container__product-main">
+      <ul class="product__list">
+        <li class="product__item" *ngFor="let product of products | paginate: {itemsPerPage: 16, currentPage: page}">
+          <div class="product__item-tile">
+            <figure class="product__item-card">
+              <div style="position: relative">
+                <img alt="Full Magic Gold 42MM" src="../../../assets/images/sanpham/{{product.hinhsp1}}">
+                <img class="hover-img" alt="Full Magic Gold 42MM"
+                  src="../../../assets/images/sanpham/{{product.hinhsp1}}">
+              </div>
+              <figcaption>
+                <span class="product__item-collection">{{product.tenth}}</span>
+                <span class="product__item-subcollection" title="{{product.tensp}}">{{product.tensp |
+                  tensanpham}}</span>
+                <small>
+                  <span class="product__item-price">{{product.dongia | tiente}}</span>
+                </small>
+              </figcaption>
+            </figure>
+          </div>
+          <div class="button__group" *ngIf="product.soluong >= 1; else noStockProduct">
+            <button class="button button--hyperion border">
+              <span><span>
+                  <a href="http://localhost:4200/product_detail/{{product.masp}}">Xem chi tiết</a>
+                </span></span>
+            </button>
+            <button class="button button--hyperion border">
+              <span><span>
+                  <a (click)="addToCart(product.masp)">Thêm vào giỏ</a>
+                </span></span>
+            </button>
+          </div>
+          <ng-template #noStockProduct>
+            <button class="button button--hyperion border no-stock">
+              <span><span>
+                  <a>Hết hàng</a>
+                </span></span>
+            </button>
+          </ng-template>
+        </li>
+      </ul>
+    </div>
+    <div class="pagination">
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
+    </div>
+  </div>

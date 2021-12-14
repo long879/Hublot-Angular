@@ -1,0 +1,19 @@
+::ng-deep .ngx-pagination {
+  margin: 0 !important;
+}
+
+::ng-deep .ngx-pagination li span + span,
+::ng-deep .ngx-pagination .pagination-previous a,
+::ng-deep .ngx-pagination .pagination-previous.disabled,
+::ng-deep .ngx-pagination .pagination-next a,
+::ng-deep .ngx-pagination .pagination-next.disabled {
+  color: #ffffff !important;
+}
+
+::ng-deep .ngx-pagination a:hover {
+  background-color: transparent !important;
+}
+
+::ng-deep .ngx-pagination .current {
+  background: rgba(0, 0, 0, 1) !important;
+}

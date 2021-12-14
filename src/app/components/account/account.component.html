@@ -1,0 +1,75 @@
+<div data-scroll-section>
+  <div class="container__account-heading">
+    <h1 class="account__heading-1">
+      Tài khoản cá nhân
+    </h1>
+  </div>
+  <div class="container__account">
+    <div class="container__grid-col-2">
+      <div class="grid__account-col-left" [formGroup]="formRegister">
+        <h2 class="account__heading-2">Tạo tài khoản khách hàng</h2>
+        <p class="account__paragraph">Địa chỉ Email *</p>
+        <input type="email" name="username" autocomplete="email" value="" class="account__input"
+          formControlName="email">
+        <div style="color: red; margin-top: 1.5vw;"
+          *ngIf="(emailRegister.invalid && emailRegister.touched) || (submittedRegister && emailRegister.untouched)">
+          <span *ngIf="emailRegister.errors?.required">Vui lòng nhập email! Đây là yêu cầu bắt buộc!</span>
+          <span *ngIf="emailRegister.errors?.email">Email không hợp lệ! Vui lòng kiểm tra lại email!</span>
+        </div>
+        <p class="account__paragraph-2">Mật khẩu *</p>
+        <input type="password" name="username" autocomplete="current-password" value="" class="account__input"
+          formControlName="password">
+        <div style="color: red; margin-top: 1.5vw;"
+          *ngIf="(passwordRegister.invalid && passwordRegister.touched) || (submittedRegister && passwordRegister.untouched)">
+          <span *ngIf="passwordRegister.errors?.required">Vui lòng nhập password! Đây là yêu cầu bắt buộc!</span>
+          <span *ngIf="passwordLogin.errors?.minlength">Vui lòng nhập password ít nhất có 8 kí tự.</span>
+          <span *ngIf="passwordLogin.errors?.maxlength">Vui lòng nhập password tối đa có 50 kí tự.</span>
+        </div>
+        <div class="account__group-button text-center">
+          <a class="grid__interview-link" (click)="registerUser()">
+            Đăng ký ngay
+          </a>
+          <a class="grid__interview-link" id="toLoginForm">
+            Đăng nhập ngay
+          </a>
+        </div>
+      </div>
+      <div class="grid__account-col-right" [formGroup]="formLogin">
+        <h2 class="account__heading-2">Đăng nhập</h2>
+        <p class="account__paragraph">Địa chỉ Email *</p>
+        <input type="email" name="username" autocomplete="email" value="" class="account__input"
+          formControlName="email">
+        <div style="color: red; margin-top: 1.5vw;"
+          *ngIf="(emailLogin.invalid && emailLogin.touched) || (submittedLogin && emailLogin.untouched)">
+          <span *ngIf="emailLogin.errors?.required">Vui lòng nhập email! Đây là yêu cầu bắt buộc!</span>
+          <span *ngIf="emailLogin.errors?.email">Email không hợp lệ! Vui lòng kiểm tra lại email!</span>
+        </div>
+        <p class="account__paragraph-2">Mật khẩu *</p>
+        <input type="password" name="username" autocomplete="current-password" value="" class="account__input"
+          formControlName="password">
+        <div style="color: red; margin-top: 1.5vw;"
+          *ngIf="(passwordLogin.invalid && passwordLogin.touched) || (submittedLogin && emailLogin.untouched)">
+          <span *ngIf="passwordLogin.errors?.required">Vui lòng nhập password! Đây là yêu cầu bắt buộc!</span>
+          <span *ngIf="passwordLogin.errors?.minlength">Vui lòng nhập password ít nhất có 8 kí tự.</span>
+          <span *ngIf="passwordLogin.errors?.maxlength">Vui lòng nhập password tối đa có 50 kí tự.</span>
+        </div>
+        <div class="account__group-button text-center">
+          <a class="grid__interview-link" (click)="loginUser()">
+            Đăng nhập ngay
+          </a>
+          <a class="grid__interview-link" id="toRegisterForm">
+            Đăng ký ngay
+          </a>
+        </div>
+        <div class="group__button-login-with">
+          <!-- <button class="button__facebook" (click)="signOut()"><i class="fa fa-facebook-official"
+              aria-hidden="true"></i>
+            Facebook</button>
+          <button class="button__google" (click)="signInWithGoogle()"><i class="fa fa-google" aria-hidden="true"></i>
+            Google</button> -->
+        </div>
+      </div>
+      <div class="account-transform"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+@font-face {
+  font-family: "fh";
+  src: url("../fonts/SourceSansPro-Light.woff2") format("woff2"),
+    url("../fonts/SourceSansPro-Light.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "fsp";
+  src: url("../fonts/ViaodaLibre-Regular.woff2") format("woff2"),
+    url("../fonts/ViaodaLibre-Regular.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "ft";
+  src: url("../fonts/Raleway-ExtraLight.woff2") format("woff2"),
+    url("../fonts/Raleway-ExtraLight.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: fallback;
+}

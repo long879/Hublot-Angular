@@ -1,0 +1,75 @@
+<div data-scroll-section>
+  <div class="container__cart-heading">
+    <h1 class="cart__heading-1">
+      Giỏ hàng của bạn
+    </h1>
+  </div>
+  <div class="container__cart">
+    <table class="cart__table">
+      <tr class="cart__table-thead">
+        <th class="cart__product-thumbnail">STT</th>
+        <th class="cart__product-name">Sản phẩm</th>
+        <th class="cart__product-price">Đơn giá</th>
+        <th class="cart__product-quantity">Số lượng</th>
+        <th class="cart__product-subtotal">Thành tiền</th>
+        <th class="cart__product-remove">&nbsp;</th>
+      </tr>
+      <ng-container *ngIf="cartData.data[0].numInCart !== 0, else noProduct">
+        <tr class="cart__table-tbody" *ngFor="let item of cartData.data; let i = index">
+          <td class="cart__product-thumbnail">
+            <img class="cart__product-thumbnail-img" src="/assets/images/sanpham/{{item.product.hinhsp1}}"
+              alt="{{item.product.hinhsp1}}">
+          </td>
+          <td class="cart__product-name underline">
+            <a href="http://localhost:4200/product_detail/{{item.product.masp}}">{{item.product.tensp}}</a>
+          </td>
+          <td class="cart__product-price">
+            <span>{{item.product.dongia | tiente}}</span>
+          </td>
+          <td class="cart__product-quantity">
+            <div class="container__quantity">
+              <button class="button--decrement" type="button" id="decrease" (click)="ChangeQuantity(i,false)"
+                value="Decrease Value">-</button>
+              <input type="number" class="quantity" id="number" [value]="item.numInCart" readonly disabled
+                [max]="item.product.soluong">
+              <button class="button--increment" type="button" id="increase" (click)="ChangeQuantity(i,true)"
+                value="Increase Value">+</button>
+            </div>
+          </td>
+          <td class="cart__product-subtotal">
+            <span>{{cartService.CalculateSubTotal(i) | tiente}}</span>
+          </td>
+          <td class="cart__product-remove" (click)="cartService.DeleteProductFromCart(i)">
+            x
+          </td>
+        </tr>
+      </ng-container>
+      <ng-template #noProduct>
+        <tr class="cart__table-tbody">
+          <td colspan="6" class="cart__product-noproduct">
+            Chưa có sản phẩm nào trong giỏ
+          </td>
+        </tr>
+      </ng-template>
+      <tr class="cart__table-tfooter">
+        <td colspan="2">
+          <div class="cart__product-total-first">
+            <span>Tổng số tiền: {{cartTotal | tiente}}</span>
+          </div>
+        </td>
+        <td colspan="4">
+          <div class="cart__product-total-second">
+            <a *ngIf="cartTotal !== 0;else noCart" (click)="CheckoutFromCart()">
+              Thanh toán đơn hàng
+            </a>
+            <ng-template #noCart>
+              <a href="http://localhost:4200/products">
+                Quay lại mua sắm
+              </a>
+            </ng-template>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+<app-header></app-header>
+<div class="scroll" id="top">
+  <div class="header__carousel" data-scroll-section>
+    <owl-carousel-o [options]="customOptions">
+      <ng-template carouselSlide>
+        <div class="carousel__video">
+          <video [autoplay]="'true'" [loop]="'true'" [muted]="'true'" src="../assets/video/apose.mp4"
+            poster="../assets/images/giaodien/apose.jpg" type="video/mp4"></video>
+          <div class="overlay" data-scroll data-scroll-speed="2">
+            <h1 class="overlay__heading">
+              "Apose" đến từ Pháp,<br>
+              thiết kế kim loại nguyên khối,<br>
+              mang lại sự tinh tế mới lạ.
+            </h1>
+            <a class="overlay__link" href="http://localhost:4200/products/loaithuonghieu/Apose">
+              Xem thêm chi tiết
+            </a>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template carouselSlide>
+        <div class="carousel__video">
+          <video [autoplay]="'true'" [loop]="'true'" [muted]="'true'" src="../assets/video/hublot.mp4"
+            poster="../assets/images/giaodien/hublot.jpg" type="video/mp4"></video>
+          <div class="overlay" data-scroll data-scroll-speed="2">
+            <h1 class="overlay__heading">
+              "HUBLOT" mang đến<br>
+              những đường nét táo bạo<br>
+              phá cách và lịch lãm.
+            </h1>
+            <a class="overlay__link" href="http://localhost:4200/products/loaithuonghieu/Hublot">
+              Xem thêm chi tiết
+            </a>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template carouselSlide>
+        <div class="carousel__video">
+          <video [autoplay]="'true'" [loop]="'true'" [muted]="'true'" src="../assets/video/richard-mille.mp4"
+            poster="../assets/images/giaodien/richard-mille.png" type="video/mp4"></video>
+          <div class="overlay" data-scroll data-scroll-speed="2">
+            <h1 class="overlay__heading">
+              "Richard Mille" gã khổng lồ<br>
+              của thế giới đồng hồ<br>
+              hiện đại và tương lai.
+            </h1>
+            <a class="overlay__link" href="http://localhost:4200/products/loaithuonghieu/Richard Mille">
+              Xem thêm chi tiết
+            </a>
+          </div>
+        </div>
+      </ng-template>
+      <ng-template carouselSlide>
+        <div class="carousel__video">
+          <video [autoplay]="'true'" [loop]="'true'" [muted]="'true'" src="../assets/video/jacobandcocom.mp4"
+            poster="../assets/images/giaodien/jacobandcocom.jpg" type="video/mp4"></video>
+          <div class="overlay" data-scroll data-scroll-speed="2">
+            <h1 class="overlay__heading">
+              "Jacob & Co" người đi đầu<br>
+              trong thiết kế độc đáo,<br>
+              ấn tượng.
+            </h1>
+            <a class="overlay__link" href="http://localhost:4200/products/loaithuonghieu/Jacob & Co">
+              Xem thêm chi tiết
+            </a>
+          </div>
+        </div>
+      </ng-template>
+    </owl-carousel-o>
+  </div>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+</div>
